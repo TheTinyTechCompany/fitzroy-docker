@@ -3,26 +3,13 @@ jobs:
   build:
     working_directory: /workdir
     docker:
-      - image: docker:17.06.0-ce-git
+      - image: docker:git
         environment:
-          RELEASE_SERIES_LIST: "3"
-          LATEST_STABLE: "3"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7"
-          IMAGE_NAME: rstudio
-          DOCKER_PROJECT: fitzroy
+          IMAGE_NAME: fitzroy:rstudio
+          DOCKER_PROJECT: thetinytechco
 
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 17.06.0-ce
-      - run:
-          name: Upgrade system packages (workaround - https://github.com/docker-library/docker/issues/72)
-          command: |
-            apk upgrade --no-cache
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache curl bash coreutils
       - run:
           name: Docker info
           command: |
@@ -36,6 +23,9 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t thetinytechco/fitzroy:rstudio -f rstudio/Dockerfile .
+            docker build -t thetinytechco/fitzroy:rstudio -f rstudio/Dockerfile . 
+      - run:
+          name: Push Docker Image
+          command: |
             docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
             docker push thetinytechco/fitzroy:rstudio
