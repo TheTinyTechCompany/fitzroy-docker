@@ -16,7 +16,7 @@ jobs:
           name: Docker info
           command: |
             docker version
-            docker info
+            docker info 
       - restore_cache:
           keys:
             - cache-{{ .Branch }}
