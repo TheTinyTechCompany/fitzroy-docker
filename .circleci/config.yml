@@ -7,6 +7,7 @@ jobs:
         environment:
           IMAGE_NAME: fitzroy:rstudio
           DOCKER_PROJECT: thetinytechco
+          RSTUDIO_VERSION: 3.4.1
 
     steps:
       - checkout
@@ -25,9 +26,13 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t thetinytechco/fitzroy:rstudio -f rstudio/Dockerfile . 
+            docker build -t thetinytechco/fitzroy:rstudio-${RSTUDIO_VERSION} -f rstudio/Dockerfile . 
+            docker tag thetinytechco/fitzroy:rstudio-${RSTUDIO_VERSION} thetinytechco/fitzroy:latest
+            docker tag thetinytechco/fitzroy:rstudio-${RSTUDIO_VERSION} thetinytechco/fitzroy:rstudio
       - run:
           name: Push Docker Image
           command: |
             docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+            docker push thetinytechco/fitzroy:latest
             docker push thetinytechco/fitzroy:rstudio
+            docker push thetinytechco/fitzroy:rstudio-${RSTUDIO_VERSION}
