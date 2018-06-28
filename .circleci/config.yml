@@ -36,4 +36,6 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t fitzroy/rstudio -f rstudio/Dockerfile .
+            docker build -t thetinytechco/fitzroy:rstudio -f rstudio/Dockerfile .
+            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+            docker push thetinytechco/fitzroy:rstudio
