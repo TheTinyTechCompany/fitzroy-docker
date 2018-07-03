@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Push Docker Image
           command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+            ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USER}
             docker push thetinytechco/fitzroy:latest
             docker push thetinytechco/fitzroy:rstudio
             docker push thetinytechco/fitzroy:rstudio-${RSTUDIO_VERSION}
