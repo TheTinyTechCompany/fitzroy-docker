@@ -2,6 +2,8 @@
 
 A Docker image for [Fitzroy](https://github.com/jimmyday12/fitzRoy).  Get your AFL stats in a container.
 
+Current image using `v0.1.5` of Fitzroy.
+
 #### Usage
  
 Once you have the images, (e.g. `docker pull thetinytechco/fitzroy:rstudio`)
