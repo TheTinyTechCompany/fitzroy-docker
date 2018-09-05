@@ -1,4 +1,7 @@
+# NOTE: This image has been moved to https://github.com/jimmyday12/fitzRoy & https://hub.docker.com/r/jimmyday12/fitzroy
+
 # fitzroy-docker
+
 
 A Docker image for [Fitzroy](https://github.com/jimmyday12/fitzRoy).  Get your AFL stats in a container.
 
